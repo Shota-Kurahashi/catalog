@@ -1,63 +1,59 @@
-# Nextjs App Directory Template
+# UI Catalog
 
-### setting
+これは、Tailwind CSS を用いた UI コンポーネント集です。
 
-```bash
-pnpm install
-```
+### 説明
 
-```bash
-pnpm husky install
-```
+この UI コンポーネント集は、Tailwind CSS を用いて作成されています。
+Font には、[Inter](https://fonts.google.com/specimen/Inter)を使用しています。
 
-### データ fetch をする場合は MSW を install してください。
+### 依存関係 (太字のものは、必須です)
 
-```bash
-pnpm add -D msw
+- **[Tailwind CSS](https://tailwindcss.com/)**
 
-# and
+- **[Heroicons](https://heroicons.com/)**
 
-pnpm add -D msw-storybook-addon
+- [Headlessui](https://headlessui.dev/)
 
-# next
+- [tailwindcss/aspect-ratio](https://github.com/tailwindlabs/tailwindcss-aspect-ratio)
 
-npx msw init public/
-```
+- [tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms)
 
-.storybook/main.ts に以下を追加してください。
-
-```ts
-import { initialize, mswDecorator } from "msw-storybook-addon";
-
-// Initialize MSW
-initialize();
-
-// Provide the MSW addon decorator globally
-export const decorators = [mswDecorator];
-```
-
-pacakge.json に以下を追加してください。
-
-```json
-  "msw": {
-    "workerDirectory": "public"
-  }
-```
-
-### storybook を起動する場合は以下を実行してください。
+### インストール
 
 ```bash
-pnpm sb
+pnpm add @heroicons/react @headlessui/react tailwind-merge clsx
+
+pnpm add -D @tailwindcss/aspect-ratio @tailwindcss/forms
 ```
 
-### テストを実行する場合は以下を実行してください。
+以下のコードを、`tailwind.config.js`に追加してください。
 
-```bash
-pnpm test
+```js
+module.exports = {
+  theme: {
+    extend: {
+      // ...other configurations
+      fontFamily: {
+        inter: ["Inter var", "sans-serif"],
+        sans: ["Inter var", "sans-serif"],
+      },
+    },
+  },
+  plugins: [
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/aspect-ratio"),
+  ],
+};
 ```
 
-### nextjs を起動する場合は以下を実行してください。
+以下の関数を作成してください。
 
-```bash
-pnpm dev
+```js
+import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export const cn = (...classNames: (string | undefined)[]) => {
+  return twMerge(clsx(...classNames));
+};
 ```
