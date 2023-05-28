@@ -31,12 +31,32 @@ pnpm add -D @tailwindcss/aspect-ratio @tailwindcss/forms
 
 ```js
 module.exports = {
+  // ... other options
   theme: {
     extend: {
-      // ...other configurations
       fontFamily: {
         inter: ["Inter var", "sans-serif"],
         sans: ["Inter var", "sans-serif"],
+      },
+      animation: {
+        spinner: "spinner 2s linear infinite",
+        "spinner-child": "spinner-child 1.5s linear infinite",
+      },
+      keyframes: {
+        spinner: {
+          "100%": { transform: "rotate(360deg)" },
+        },
+        "spinner-child": {
+          "0%": {
+            "stroke-dasharray": "0 150",
+            "stroke-dashoffset": "0",
+          },
+          "47.5%": { "stroke-dasharray": "42 150", "stroke-dashoffset": "-16" },
+          "95%,100%": {
+            "stroke-dasharray": "42 150",
+            "stroke-dashoffset": "-59",
+          },
+        },
       },
     },
   },
@@ -56,40 +76,4 @@ import { twMerge } from "tailwind-merge";
 export const cn = (...classNames: (string | undefined)[]) => {
   return twMerge(clsx(...classNames));
 };
-```
-
-以下の CSS を Tailwind.css に追加してください
-
-```css
-.spinner_V8m1 {
-  transform-origin: center;
-  animation: spinner_zKoa 2s linear infinite;
-}
-
-.spinner_V8m1 circle {
-  stroke-linecap: round;
-  animation: spinner_YpZS 1.5s ease-in-out infinite;
-}
-
-@keyframes spinner_zKoa {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes spinner_YpZS {
-  0% {
-    stroke-dasharray: 0 150;
-    stroke-dashoffset: 0;
-  }
-  47.5% {
-    stroke-dasharray: 42 150;
-    stroke-dashoffset: -16;
-  }
-  95%,
-  100% {
-    stroke-dasharray: 42 150;
-    stroke-dashoffset: -59;
-  }
-}
 ```
