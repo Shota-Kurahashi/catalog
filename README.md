@@ -1,6 +1,7 @@
 # UI Catalog
 
 これは、Tailwind CSS を用いた UI コンポーネント集です。
+次のサイトで storybook のページを確認できます。[Storybook](https://6473f87ff4bb6286042ad938-mtzjqyaqep.chromatic.com/?path=/docs/components-elements-button--docs)
 
 ### 説明
 
